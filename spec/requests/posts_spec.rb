@@ -1,16 +1,19 @@
 require 'rails_helper'
 
-RSpec.describe 'Posts routing', type: :routing do
-  it 'routes to the posts index' do
-    expect(get: '/users/1/posts').to route_to('posts#index', user_id: '1')
+RSpec.describe 'Posts', type: :request do
+  describe 'GET /index' do
+    it 'returns http success and check correct placeholder text.' do
+      get '/users/:author_id/posts'
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include('Here is a list of posts for a given user')
+    end
   end
 
-  it 'routes to the post show' do
-    expect(get: '/users/1/posts/1').to route_to('posts#show', user_id: '1', id: '1')
-  end
-
-  it 'has named routes for the posts resource' do
-    expect(get: user_posts_path(1)).to be_routable
-    expect(get: user_post_path(1, 1)).to be_routable
+  describe 'GET /show' do
+    it 'returns http success and check correct placeholder text.' do
+      get '/users/:author_id/posts/:id'
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include('Here show post by ID')
+    end
   end
 end

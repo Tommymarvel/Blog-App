@@ -1,16 +1,19 @@
 require 'rails_helper'
 
-RSpec.describe 'Users routing', type: :routing do
-  it 'routes to the users index' do
-    expect(get: '/users').to route_to('users#index')
+RSpec.describe 'Users', type: :request do
+  describe 'GET /index' do
+    it 'returns http success and check correct placeholder text.' do
+      get '/'
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include('Here is a list of users')
+    end
   end
 
-  it 'routes to the user show' do
-    expect(get: '/users/1').to route_to('users#show', id: '1')
-  end
-
-  it 'has named routes for the users resource' do
-    expect(get: users_path).to be_routable
-    expect(get: user_path(1)).to be_routable
+  describe 'GET /show' do
+    it 'returns http success and check correct placeholder text.' do
+      get '/users/:id'
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include('Here show user by id')
+    end
   end
 end
