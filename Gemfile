@@ -12,6 +12,8 @@ gem 'sprockets-rails'
 # Use devise as the session and account manage fot the app
 gem 'devise'
 
+gem 'devise-jwt'
+
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 
